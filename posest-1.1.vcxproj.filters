@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\mlsl">
+      <UniqueIdentifier>{80bc09f7-0534-4085-8db9-58cc9efbbc25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mlsl">
+      <UniqueIdentifier>{607607d8-09d1-41e9-8b06-8f8fa28841e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\levmar">
+      <UniqueIdentifier>{6e698777-0745-41e5-8005-597810aea92f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\levmar">
+      <UniqueIdentifier>{9cf50369-7d05-4813-9926-7536824fb3c1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="compiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lqs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="p3p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="p4pf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="planep4p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="polysolve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="poseproj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="posest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prosac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ransac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rngs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="svd3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mlsl\mlsl.h">
+      <Filter>Header Files\mlsl</Filter>
+    </ClInclude>
+    <ClInclude Include="mlsl\mt19937ar.h">
+      <Filter>Header Files\mlsl</Filter>
+    </ClInclude>
+    <ClInclude Include="mlsl\redblack.h">
+      <Filter>Header Files\mlsl</Filter>
+    </ClInclude>
+    <ClInclude Include="mlsl\sobol.h">
+      <Filter>Header Files\mlsl</Filter>
+    </ClInclude>
+    <ClInclude Include="mlsl\soboldata.h">
+      <Filter>Header Files\mlsl</Filter>
+    </ClInclude>
+    <ClInclude Include="levmar-2.6\compiler.h">
+      <Filter>Header Files\levmar</Filter>
+    </ClInclude>
+    <ClInclude Include="levmar-2.6\levmar.h">
+      <Filter>Header Files\levmar</Filter>
+    </ClInclude>
+    <ClInclude Include="levmar-2.6\misc.h">
+      <Filter>Header Files\levmar</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="align.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="buckets.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lhm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lqs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p3p.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p4pf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="planep4p.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="polysolve.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="poseproj.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="posest.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="prosac.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ransac.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rngs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sam.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="svd3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="posest_demo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mlsl\mlsl.c">
+      <Filter>Source Files\mlsl</Filter>
+    </ClCompile>
+    <ClCompile Include="mlsl\mt19937ar.c">
+      <Filter>Source Files\mlsl</Filter>
+    </ClCompile>
+    <ClCompile Include="mlsl\redblack.c">
+      <Filter>Source Files\mlsl</Filter>
+    </ClCompile>
+    <ClCompile Include="mlsl\sobolseq.c">
+      <Filter>Source Files\mlsl</Filter>
+    </ClCompile>
+    <ClCompile Include="levmar-2.6\Axb.c">
+      <Filter>Source Files\levmar</Filter>
+    </ClCompile>
+    <ClCompile Include="levmar-2.6\lm.c">
+      <Filter>Source Files\levmar</Filter>
+    </ClCompile>
+    <ClCompile Include="levmar-2.6\lmbc.c">
+      <Filter>Source Files\levmar</Filter>
+    </ClCompile>
+    <ClCompile Include="levmar-2.6\lmblec.c">
+      <Filter>Source Files\levmar</Filter>
+    </ClCompile>
+    <ClCompile Include="levmar-2.6\lmbleic.c">
+      <Filter>Source Files\levmar</Filter>
+    </ClCompile>
+    <ClCompile Include="levmar-2.6\lmlec.c">
+      <Filter>Source Files\levmar</Filter>
+    </ClCompile>
+    <ClCompile Include="levmar-2.6\misc.c">
+      <Filter>Source Files\levmar</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

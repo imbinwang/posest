@@ -1,0 +1,4 @@
+# zero focal length, will be estimated with the pose
+0.0 0 600
+0.0 3000 450
+0.0 0.0 1.0
