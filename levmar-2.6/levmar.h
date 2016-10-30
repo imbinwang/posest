@@ -109,6 +109,12 @@ extern int dlevmar_der(
       double *p, double *x, int m, int n, int itmax, double *opts,
       double *info, double *work, double *covar, void *adata);
 
+extern int dlevmar_rob_der(
+	  void(*func)(double *p, double *hx, int m, int n, void *adata), 
+	  void(*jacf)(double *p, double *j, int m, int n, void *adata), 
+	  double *p, double *x, int m, int n, double *rp, int itmax, double *opts,
+	  double *info, double *work, double *covar, void *adata);
+
 extern int dlevmar_dif(
       void (*func)(double *p, double *hx, int m, int n, void *adata),
       double *p, double *x, int m, int n, int itmax, double *opts,
@@ -213,6 +219,12 @@ extern int slevmar_der(
       void (*jacf)(float *p, float *j, int m, int n, void *adata),
       float *p, float *x, int m, int n, int itmax, float *opts,
       float *info, float *work, float *covar, void *adata);
+
+extern int slevmar_rob_der(
+	void(*func)(float *p, float *hx, int m, int n, void *adata),
+	void(*jacf)(float *p, float *j, int m, int n, void *adata),
+	float *p, float *x, int m, int n, float *rp, int itmax, float *opts,
+	float *info, float *work, float *covar, void *adata);
 
 extern int slevmar_dif(
       void (*func)(float *p, float *hx, int m, int n, void *adata),

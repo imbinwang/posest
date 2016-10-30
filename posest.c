@@ -30,9 +30,10 @@
 #include "prosac.h"
 
 #include "./levmar-2.6/levmar.h"
+#include "./levmar-2.6/mestimators.h"
 #include "./mlsl/mlsl.h"
 
-#define USE_ROBUST_LM       0 // enable robustified L-M?
+#define USE_ROBUST_LM       1// enable robustified L-M?
 #define USE_INPLACE_REFN    1 // enable in-place parameterization for refinement
 
 #define USE_LQS_FIT    0 // use LQS (LMedS) if 1
@@ -601,10 +602,10 @@ int ret;
 # endif
 
   /* use convex cost function first, then non-convex */
-  rp[0]=LM_FAIR; rp[1]=0.6; // Fair
+  rp[0]=ME_FAIR; rp[1]=0.6; // Fair
   ret=dlevmar_rob_der(err, jacerr, p, x, m, n, rp, 1000, opts, info, NULL, NULL, (void *)data);
   //rp[0]=LM_TUKEY; rp[1]=0.20; // Tukey
-  rp[0]=LM_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
+  rp[0]=ME_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
   ret=dlevmar_rob_der(err, jacerr, p, x, m, n, rp, 100, opts, info, NULL, NULL, (void *)data);
   }
 #endif /* USE_ROBUST_LM */
@@ -1028,10 +1029,10 @@ int ret;
   { double rp[2];
 
   /* convex cost function first, then non-convex */
-  rp[0]=LM_FAIR; rp[1]=0.6; // Fair
+  rp[0]=ME_FAIR; rp[1]=0.6; // Fair
   ret=dlevmar_rob_der(err, jacerr, p, x, m, n, rp, 1000, opts, info, NULL, NULL, (void *)data);
   //rp[0]=LM_TUKEY; rp[1]=0.20; // Tukey
-  rp[0]=LM_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
+  rp[0]=ME_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
   ret=dlevmar_rob_der(err, jacerr, p, x, m, n, rp, 100, opts, info, NULL, NULL, (void *)data);
   }
 #endif /* USE_ROBUST_LM */
@@ -1765,10 +1766,10 @@ void (*jacerr)(double *p, double *j, int m, int n, void *adata);
   { double rp[2];
 
   /* convex cost function first, then non-convex */
-  rp[0]=LM_FAIR; rp[1]=0.8; // Fair
+  rp[0]=ME_FAIR; rp[1]=0.8; // Fair
   retLR=dlevmar_rob_der(err, jacerr, rtLs, x, m, n, rp, 1000, opts, infoLR, NULL, NULL, (void *)&data);
   //rp[0]=LM_TUKEY; rp[1]=0.20; // Tukey
-  rp[0]=LM_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
+  rp[0]=ME_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
   retLR=dlevmar_rob_der(err, jacerr, rtLs, x, m, n, rp, 200, opts, infoLR, NULL, NULL, (void *)&data);
   }
 #endif /* USE_ROBUST_LM */
@@ -1832,10 +1833,10 @@ void (*jacerr)(double *p, double *j, int m, int n, void *adata);
   { double rp[2];
 
   /* convex cost function first, then non-convex */
-  rp[0]=LM_FAIR; rp[1]=0.8; // Fair
+  rp[0]=ME_FAIR; rp[1]=0.8; // Fair
   ret=dlevmar_rob_der(err, jacerr, rtRs, x, m, n, rp, 1000, opts, infoRL, NULL, NULL, (void *)&data);
   //rp[0]=LM_TUKEY; rp[1]=0.20; // Tukey
-  rp[0]=LM_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
+  rp[0]=ME_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
   ret=dlevmar_rob_der(err, jacerr, rtRs, x, m, n, rp, 200, opts, infoRL, NULL, NULL, (void *)&data);
   }
 #endif /* USE_ROBUST_LM */

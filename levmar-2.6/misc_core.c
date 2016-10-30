@@ -17,10 +17,17 @@
 //
 /////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////////////////////
+// 
+//  Add func LEVMAR_ROB_L2NRMXMY for robust m-estimators
+//  Bin Wang (binwangsdu at gmail.com)
+//  2016-10-30
+//
+/////////////////////////////////////////////////////////////////////////////////
+
 #ifndef LM_REAL // not included by misc.c
 #error This file should not be compiled directly!
 #endif
-
 
 /* precision-specific definitions */
 #define LEVMAR_CHKJAC LM_ADD_PREFIX(levmar_chkjac)
@@ -33,6 +40,8 @@
 #define LEVMAR_R2 LM_ADD_PREFIX(levmar_R2)
 #define LEVMAR_BOX_CHECK LM_ADD_PREFIX(levmar_box_check)
 #define LEVMAR_L2NRMXMY LM_ADD_PREFIX(levmar_L2nrmxmy)
+
+#define LEVMAR_ROB_L2NRMXMY LM_ADD_PREFIX(levmar_rob_L2nrmxmy)
 
 #ifdef HAVE_LAPACK
 #define LEVMAR_PSEUDOINVERSE LM_ADD_PREFIX(levmar_pseudoinverse)
@@ -806,6 +815,125 @@ register LM_REAL sum0=0.0, sum1=0.0, sum2=0.0, sum3=0.0;
   return sum0+sum1+sum2+sum3;
 }
 
+LM_REAL LEVMAR_ROB_L2NRMXMY(LM_REAL *e, LM_REAL *x, LM_REAL *y, int n, LM_REAL *rp)
+{
+	const int blocksize = 8, bpwr = 3; /* 8=2^3 */
+	register int i;
+	int j1, j2, j3, j4, j5, j6, j7;
+	int blockn;
+	register LM_REAL sum0 = 0.0, sum1 = 0.0, sum2 = 0.0, sum3 = 0.0;
+	register LM_REAL td0 = 0.0, td1 = 0.0, td2 = 0.0, td3 = 0.0, td4 = 0.0, td5 = 0.0, td6 = 0.0, td7 = 0.0;
+	register LM_REAL mew0 = 0.0, mew1 = 0.0, mew2 = 0.0, mew3 = 0.0, mew4 = 0.0, mew5 = 0.0, mew6 = 0.0, mew7 = 0.0;
+
+	int me_type = (int)rp[0];
+	LM_REAL ctrl_var = rp[1];
+
+	LM_REAL (*me_weight)(LM_REAL xv, LM_REAL cv);
+	switch (me_type)
+	{
+	case ME_FAIR:
+#ifdef LM_SNGL_PREC
+		me_weight = sfair_weight;
+#endif
+#ifdef LM_DBL_PREC
+		me_weight = dfair_weight;
+#endif
+	case ME_GEMANMCCLURE:
+#ifdef LM_SNGL_PREC
+		me_weight = sgemanmcclure_weight;
+#endif
+#ifdef LM_DBL_PREC
+		me_weight = dgemanmcclure_weight;
+#endif
+	case ME_TUKEY:
+#ifdef LM_SNGL_PREC
+		me_weight = stukey_weight;
+#endif
+#ifdef LM_DBL_PREC
+		me_weight = dtukey_weight;
+#endif
+	}
+
+	/* n may not be divisible by blocksize,
+	* go as near as we can first, then tidy up.
+	*/
+	blockn = (n >> bpwr) << bpwr; /* (n / blocksize) * blocksize; */
+
+	/* unroll the loop in blocks of `blocksize'; looping downwards gains some more speed */
+	if (x){
+		for (i = blockn - 1; i>0; i -= blocksize){
+			td0 = x[i] - y[i]; mew0 = me_weight(td0, ctrl_var); e[i] = mew0*td0; sum0 += e[i] * e[i];
+			j1 = i - 1; td1 = x[j1] - y[j1]; mew1 = me_weight(td1, ctrl_var); e[j1] = mew1*td1; sum1 += e[j1] * e[j1];
+			j2 = i - 2; td2 = x[j2] - y[j2]; mew2 = me_weight(td2, ctrl_var); e[j2] = mew2*td2; sum2 += e[j2] * e[j2];
+			j3 = i - 3; td3 = x[j3] - y[j3]; mew3 = me_weight(td3, ctrl_var); e[j3] = mew3*td3; sum3 += e[j3] * e[j3];
+			j4 = i - 4; td4 = x[j4] - y[j4]; mew4 = me_weight(td4, ctrl_var); e[j4] = mew4*td4; sum0 += e[j4] * e[j4];
+			j5 = i - 5; td5 = x[j5] - y[j5]; mew5 = me_weight(td5, ctrl_var); e[j5] = mew5*td5; sum1 += e[j5] * e[j5];
+			j6 = i - 6; td6 = x[j6] - y[j6]; mew6 = me_weight(td6, ctrl_var); e[j6] = mew6*td6; sum2 += e[j6] * e[j6];
+			j7 = i - 7; td7 = x[j7] - y[j7]; mew7 = me_weight(td7, ctrl_var); e[j7] = mew7*td7; sum3 += e[j7] * e[j7];
+		}
+
+		/*
+		* There may be some left to do.
+		* This could be done as a simple for() loop,
+		* but a switch is faster (and more interesting)
+		*/
+
+		i = blockn;
+		if (i<n){
+			/* Jump into the case at the place that will allow
+			* us to finish off the appropriate number of items.
+			*/
+
+			switch (n - i){
+			case 7: td0 = x[i] - y[i]; mew0 = me_weight(td0, ctrl_var); e[i] = mew0*td0; sum0 += e[i] * e[i]; ++i;
+			case 6: td1 = x[i] - y[i]; mew1 = me_weight(td1, ctrl_var); e[i] = mew1*td1; sum1 += e[i] * e[i]; ++i;
+			case 5: td2 = x[i] - y[i]; mew2 = me_weight(td2, ctrl_var); e[i] = mew2*td2; sum2 += e[i] * e[i]; ++i;
+			case 4: td3 = x[i] - y[i]; mew3 = me_weight(td3, ctrl_var); e[i] = mew3*td3; sum3 += e[i] * e[i]; ++i;
+			case 3: td0 = x[i] - y[i]; mew0 = me_weight(td0, ctrl_var); e[i] = mew0*td0; sum0 += e[i] * e[i]; ++i;
+			case 2: td1 = x[i] - y[i]; mew1 = me_weight(td1, ctrl_var); e[i] = mew1*td1; sum1 += e[i] * e[i]; ++i;
+			case 1: td2 = x[i] - y[i]; mew2 = me_weight(td2, ctrl_var); e[i] = mew2*td2; sum2 += e[i] * e[i]; //++i;
+			}
+		}
+	}
+	else{ /* x==0 */
+		for (i = blockn - 1; i>0; i -= blocksize){
+			td0 = -y[i]; mew0 = me_weight(td0, ctrl_var); e[i] = mew0*td0; sum0 += e[i] * e[i];
+			j1 = i - 1; td1 = -y[j1]; mew1 = me_weight(td1, ctrl_var); e[j1] = mew1*td1; sum1 += e[j1] * e[j1];
+			j2 = i - 2; td2 = -y[j2]; mew2 = me_weight(td2, ctrl_var); e[j2] = mew2*td2; sum2 += e[j2] * e[j2];
+			j3 = i - 3; td3 = -y[j3]; mew3 = me_weight(td3, ctrl_var); e[j3] = mew3*td3; sum3 += e[j3] * e[j3];
+			j4 = i - 4; td4 = -y[j4]; mew4 = me_weight(td4, ctrl_var); e[j4] = mew4*td4; sum0 += e[j4] * e[j4];
+			j5 = i - 5; td5 = -y[j5]; mew5 = me_weight(td5, ctrl_var); e[j5] = mew5*td5; sum1 += e[j5] * e[j5];
+			j6 = i - 6; td6 = -y[j6]; mew6 = me_weight(td6, ctrl_var); e[j6] = mew6*td6; sum2 += e[j6] * e[j6];
+			j7 = i - 7; td7 = -y[j7]; mew7 = me_weight(td7, ctrl_var); e[j7] = mew7*td7; sum3 += e[j7] * e[j7];
+		}
+
+		/*
+		* There may be some left to do.
+		* This could be done as a simple for() loop,
+		* but a switch is faster (and more interesting)
+		*/
+
+		i = blockn;
+		if (i<n){
+			/* Jump into the case at the place that will allow
+			* us to finish off the appropriate number of items.
+			*/
+
+			switch (n - i){
+			case 7: td0 = -y[i]; mew0 = me_weight(td0, ctrl_var); e[i] = mew0*td0; sum0 += e[i] * e[i]; ++i;
+			case 6: td1 = -y[i]; mew1 = me_weight(td1, ctrl_var); e[i] = mew1*td1; sum1 += e[i] * e[i]; ++i;
+			case 5: td2 = -y[i]; mew2 = me_weight(td2, ctrl_var); e[i] = mew2*td2; sum2 += e[i] * e[i]; ++i;
+			case 4: td3 = -y[i]; mew3 = me_weight(td3, ctrl_var); e[i] = mew3*td3; sum3 += e[i] * e[i]; ++i;
+			case 3: td0 = -y[i]; mew0 = me_weight(td0, ctrl_var); e[i] = mew0*td0; sum0 += e[i] * e[i]; ++i;
+			case 2: td1 = -y[i]; mew1 = me_weight(td1, ctrl_var); e[i] = mew1*td1; sum1 += e[i] * e[i]; ++i;
+			case 1: td2 = -y[i]; mew2 = me_weight(td2, ctrl_var); e[i] = mew2*td2; sum2 += e[i] * e[i]; //++i;
+			}
+		}
+	}
+
+	return sum0 + sum1 + sum2 + sum3;
+}
+
 /* undefine everything. THIS MUST REMAIN AT THE END OF THE FILE */
 #undef POTF2
 #undef GESVD
@@ -824,3 +952,5 @@ register LM_REAL sum0=0.0, sum1=0.0, sum2=0.0, sum3=0.0;
 #undef LEVMAR_FDIF_CENT_JAC_APPROX
 #undef LEVMAR_TRANS_MAT_MAT_MULT
 #undef LEVMAR_L2NRMXMY
+
+#undef LEVMAR_ROB_L2NRMXMY

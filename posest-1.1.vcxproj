@@ -146,6 +146,7 @@
     <ClInclude Include="compiler.h" />
     <ClInclude Include="levmar-2.6\compiler.h" />
     <ClInclude Include="levmar-2.6\levmar.h" />
+    <ClInclude Include="levmar-2.6\mestimators.h" />
     <ClInclude Include="levmar-2.6\misc.h" />
     <ClInclude Include="lqs.h" />
     <ClInclude Include="mlsl\mlsl.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="levmar-2.6\lmblec.c" />
     <ClCompile Include="levmar-2.6\lmbleic.c" />
     <ClCompile Include="levmar-2.6\lmlec.c" />
+    <ClCompile Include="levmar-2.6\mestimators.c" />
     <ClCompile Include="levmar-2.6\misc.c" />
     <ClCompile Include="lhm.c" />
     <ClCompile Include="lqs.c" />

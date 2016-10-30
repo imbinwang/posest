@@ -95,6 +95,10 @@ extern void dlevmar_fdif_cent_jac_approx(void (*func)(double *p, double *hx, int
 extern float  slevmar_L2nrmxmy(float *e, float *x, float *y, int n);
 extern double dlevmar_L2nrmxmy(double *e, double *x, double *y, int n);
 
+/* e=x-y and w*||e||, add m-estimators (reweighted) */
+extern float  slevmar_rob_L2nrmxmy(float *e, float *x, float *y, int n, float *rp);
+extern double dlevmar_rob_L2nrmxmy(double *e, double *x, double *y, int n, double *rp);
+
 /* covariance of LS fit */
 extern int slevmar_covar(float *JtJ, float *C, float sumsq, int m, int n);
 extern int dlevmar_covar(double *JtJ, double *C, double sumsq, int m, int n);
