@@ -602,10 +602,10 @@ int ret;
 # endif
 
   /* use convex cost function first, then non-convex */
-  rp[0]=ME_FAIR; rp[1]=0.6; // Fair
+  rp[0] = ME_FAIR; rp[1]= 1.3998; // Fair 0.6
   ret=dlevmar_rob_der(err, jacerr, p, x, m, n, rp, 1000, opts, info, NULL, NULL, (void *)data);
-  //rp[0]=LM_TUKEY; rp[1]=0.20; // Tukey
-  rp[0]=ME_GEMANMCCLURE; rp[1]=0.25; // Geman-McClure
+  //rp[0] = ME_TUKEY; rp[1] = 4.6851;//; // Tukey 0.20
+  rp[0] = ME_GEMANMCCLURE; rp[1] = 2.3849; // Geman-McClure 0.25
   ret=dlevmar_rob_der(err, jacerr, p, x, m, n, rp, 100, opts, info, NULL, NULL, (void *)data);
   }
 #endif /* USE_ROBUST_LM */
