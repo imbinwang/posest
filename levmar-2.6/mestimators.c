@@ -149,15 +149,15 @@ float scauchy_weight(float x, float c)
 /* GEMANMCCLURE */
 float sgemanmcclure_cost(float x, float c)
 {
-	return 0.5*x*x / (1 + x*x);
+	return 0.5*x*x / (c + x*x);
 }
 float sgemanmcclure_influence(float x, float c)
 {
-	return x / ((1 + x*x)*(1 + x*x));
+	return x / ((c + x*x)*(c + x*x));
 }
 float sgemanmcclure_weight(float x, float c)
 {
-	return 1 / ((1 + x*x)*(1 + x*x));
+	return 1 / ((c + x*x)*(c + x*x));
 }
 
 /* WELSCH */
@@ -319,15 +319,15 @@ double dcauchy_weight(double x, double c)
 /* GEMANMCCLURE */
 double dgemanmcclure_cost(double x, double c)
 {
-	return 0.5*x*x / (1 + x*x);
+	return 0.5*x*x / (c + x*x);
 }
 double dgemanmcclure_influence(double x, double c)
 {
-	return x / ((1 + x*x)*(1 + x*x));
+	return x / ((c + x*x)*(c + x*x));
 }
 double dgemanmcclure_weight(double x, double c)
 {
-	return 1 / ((1 + x*x)*(1 + x*x));
+	return 1 / ((c + x*x)*(c + x*x));
 }
 
 /* WELSCH */
