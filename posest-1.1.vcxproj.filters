@@ -84,16 +84,16 @@
     <ClInclude Include="mlsl\soboldata.h">
       <Filter>Header Files\mlsl</Filter>
     </ClInclude>
-    <ClInclude Include="levmar-2.6\compiler.h">
+    <ClInclude Include="levmar\compiler.h">
       <Filter>Header Files\levmar</Filter>
     </ClInclude>
-    <ClInclude Include="levmar-2.6\levmar.h">
+    <ClInclude Include="levmar\levmar.h">
       <Filter>Header Files\levmar</Filter>
     </ClInclude>
-    <ClInclude Include="levmar-2.6\misc.h">
+    <ClInclude Include="levmar\mestimators.h">
       <Filter>Header Files\levmar</Filter>
     </ClInclude>
-    <ClInclude Include="levmar-2.6\mestimators.h">
+    <ClInclude Include="levmar\misc.h">
       <Filter>Header Files\levmar</Filter>
     </ClInclude>
   </ItemGroup>
@@ -161,28 +161,28 @@
     <ClCompile Include="mlsl\sobolseq.c">
       <Filter>Source Files\mlsl</Filter>
     </ClCompile>
-    <ClCompile Include="levmar-2.6\Axb.c">
+    <ClCompile Include="levmar\Axb.c">
       <Filter>Source Files\levmar</Filter>
     </ClCompile>
-    <ClCompile Include="levmar-2.6\lm.c">
+    <ClCompile Include="levmar\lm.c">
       <Filter>Source Files\levmar</Filter>
     </ClCompile>
-    <ClCompile Include="levmar-2.6\lmbc.c">
+    <ClCompile Include="levmar\lmbc.c">
       <Filter>Source Files\levmar</Filter>
     </ClCompile>
-    <ClCompile Include="levmar-2.6\lmblec.c">
+    <ClCompile Include="levmar\lmblec.c">
       <Filter>Source Files\levmar</Filter>
     </ClCompile>
-    <ClCompile Include="levmar-2.6\lmbleic.c">
+    <ClCompile Include="levmar\lmbleic.c">
       <Filter>Source Files\levmar</Filter>
     </ClCompile>
-    <ClCompile Include="levmar-2.6\lmlec.c">
+    <ClCompile Include="levmar\lmlec.c">
       <Filter>Source Files\levmar</Filter>
     </ClCompile>
-    <ClCompile Include="levmar-2.6\misc.c">
+    <ClCompile Include="levmar\mestimators.c">
       <Filter>Source Files\levmar</Filter>
     </ClCompile>
-    <ClCompile Include="levmar-2.6\mestimators.c">
+    <ClCompile Include="levmar\misc.c">
       <Filter>Source Files\levmar</Filter>
     </ClCompile>
   </ItemGroup>

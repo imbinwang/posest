@@ -144,10 +144,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="compiler.h" />
-    <ClInclude Include="levmar-2.6\compiler.h" />
-    <ClInclude Include="levmar-2.6\levmar.h" />
-    <ClInclude Include="levmar-2.6\mestimators.h" />
-    <ClInclude Include="levmar-2.6\misc.h" />
+    <ClInclude Include="levmar\compiler.h" />
+    <ClInclude Include="levmar\levmar.h" />
+    <ClInclude Include="levmar\mestimators.h" />
+    <ClInclude Include="levmar\misc.h" />
     <ClInclude Include="lqs.h" />
     <ClInclude Include="mlsl\mlsl.h" />
     <ClInclude Include="mlsl\mt19937ar.h" />
@@ -171,14 +171,14 @@
     <ClCompile Include="align.c" />
     <ClCompile Include="buckets.c" />
     <ClCompile Include="deal.c" />
-    <ClCompile Include="levmar-2.6\Axb.c" />
-    <ClCompile Include="levmar-2.6\lm.c" />
-    <ClCompile Include="levmar-2.6\lmbc.c" />
-    <ClCompile Include="levmar-2.6\lmblec.c" />
-    <ClCompile Include="levmar-2.6\lmbleic.c" />
-    <ClCompile Include="levmar-2.6\lmlec.c" />
-    <ClCompile Include="levmar-2.6\mestimators.c" />
-    <ClCompile Include="levmar-2.6\misc.c" />
+    <ClCompile Include="levmar\Axb.c" />
+    <ClCompile Include="levmar\lm.c" />
+    <ClCompile Include="levmar\lmbc.c" />
+    <ClCompile Include="levmar\lmblec.c" />
+    <ClCompile Include="levmar\lmbleic.c" />
+    <ClCompile Include="levmar\lmlec.c" />
+    <ClCompile Include="levmar\mestimators.c" />
+    <ClCompile Include="levmar\misc.c" />
     <ClCompile Include="lhm.c" />
     <ClCompile Include="lqs.c" />
     <ClCompile Include="mlsl\mlsl.c" />

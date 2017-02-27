@@ -70,7 +70,7 @@
 #include <time.h>
 #include <string.h>
 
-#include "../levmar-2.6/levmar.h"
+#include "../levmar/levmar.h"
 
 #include "mt19937ar.h"
 #include "sobol.h"

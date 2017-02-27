@@ -29,8 +29,8 @@
 #include "ransac.h"
 #include "prosac.h"
 
-#include "./levmar-2.6/levmar.h"
-#include "./levmar-2.6/mestimators.h"
+#include "./levmar/levmar.h"
+#include "./levmar/mestimators.h"
 #include "./mlsl/mlsl.h"
 
 #define USE_ROBUST_LM       1// enable robustified L-M?
